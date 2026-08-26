@@ -1,0 +1,67 @@
+/* =========================
+   STYLE GENERAL
+   ========================= */
+
+body {
+    margin: 0;
+    background: #111;
+    color: #eee;
+
+    font-family: Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+
+/* =========================
+   PAGE D'ACCUEIL
+   ========================= */
+
+.home {
+    text-align: center;
+}
+
+.scenario-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    max-width: 500px;
+    margin: 40px auto;
+}
+
+.scenario-menu a {
+    display: block;
+
+    padding: 15px 20px;
+
+    background: #292929;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 8px;
+
+    transition: background 0.2s;
+}
+
+.scenario-menu a:hover {
+    background: #444;
+}
+
+
+/* =========================
+   IMAGES
+   ========================= */
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
