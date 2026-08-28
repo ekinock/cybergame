@@ -1,0 +1,240 @@
+:: StoryTitle
+extension chrome
+
+
+:: StoryData
+{
+  "ifid": "A4920909-1461-4017-8A9C-3159F0921BD5",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "InitVar",
+  "zoom": 1
+}
+
+
+:: Alerte DSN {"position":"1400,500","size":"100,100"}
+Vous recevez un mail de la DSN : 
+<i>« Nous vous informons que des extensions Chrome malveillantes imitant des extensions officielles ont été détectées sur des postes CHU. Si vous avez installé récemment une extension non-certifiées par la DSN, merci de <b>prendre contact rapidement avec le CAU</b>. 
+Nous vous remercions de votre collaboration »</i>
+
+🔸 [[cela ne vous concerne pas : vous avez installé une extension Teams, et Teams est bien certifié par la DSN |Fin piratage][$DENI += 1]]
+🔸 [[vous avez un énorme doute et contactez le 14 |Fin détection][$CAU += 1]]
+🔸 [[vous désinstallez l'extension Teams, au cas où |Fin piratage collègue][$SCRED += 1]]
+
+
+:: Alerte DSN collègue {"position":"1400,325","size":"100,100"}
+Vous recevez un mail de la DSN : 
+<i>« Nous vous informons que des extensions Chrome malveillantes imitant des extensions officielles ont été détectées sur des postes CHU. Si vous avez installé récemment une extension non-certifiées par la DSN, merci de <b>prendre contact rapidement avec le CAU</b>. 
+Nous vous remercions de votre collaboration »</i>
+
+🔸 [[cela ne vous concerne pas |Fin piratage collègue]]
+🔸 [[vous avez un énorme doute et contactez le 14 |Fin détection][$CAU += 1]] 
+🔸[[vous interrogez votre collègue sur l'extension qu'il vous a vanté il y a peu, et l'incitez fortement à contacter le 14 |Fin détection][$SHIELD +=1; $CAU += 1]] 
+
+
+:: Badges {"position":"1800,350","size":"100,100"}
+<h1> Badges </h1>
+<p> En fonction des décisions que vous avez pris, vous avez obtenu certains <i>"badges"</i> ; c'est un peu la même chose que les succès que l'on peut débloquer dans les jeux vidéos. 
+<i>Les badges ont une fonction humoristique.</i></p>
+<p><<if $CAU == 0 && $AMI == 0>>
+🧠 <b>Expert autodiag</b> - Qu'est-ce qui pourrait mal se passer, hein ?
+<i>Vous n'avez pas jugé bon de demander conseil à qui que ce soit.</i><</if>>
+<<if $SHIELD == 0>>
+🏝️ <b>Joueur solo</b> - Quel dommage que vous ne soyez pas tout seul dans l'équipe
+<i>Vous n'avez pas cherché à prévenir votre collègue qu'il faisait n'importe quoi.</i><</if>>
+<<if $DENI >= 1>>
+🪿 <b>Autruche émérite</b> - Qui aurait pu prédire ?
+<i>Vous avez brillamment ignoré toutes les alertes et les éléments suspects.</i><</if>>
+<<if $CGT >= 1>>
+📢 <b>Futur gréviste</b> - En plus, la qualité de la cantine a quand même vachement baissé
+<i>Vous avez râlé contre le CHU et les restrictions budgétaires.</i><</if>>
+<<if $CAU == 0 && $INSTALL >= 1>>
+🥷 <b>Fauteur furtif</b> - Au-dessus de tout soupçon 
+<i>Vous avez désinstallé l'extension "discrètement" avant l'intervention de la DSN.</i><</if>>
+<<if $THUG >= 1>>
+🏴‍☠️ <b>Thug life</b> - Au-dessus des lois 
+<i>Vous avez demandé conseil au CAU et décidé d'ignorer son conseil. Malin.</i><</if>>
+<<if $AMI >= 10>>
+🐑 <b>Animal grégaire</b> - C'est pas moi, c'est le collègue qui m'a dit
+<i>Vous avez demandé conseil $AMI fois à votre collègue ; prenez une décision, enfin !</i><</if>>
+<<if $CAU >= 10>>
+🛟 <b>A besoin de parler</b> - 2 600 tickets EasyVista au compteur. En cours.
+<i>Vous avez appelé le CAU $CAU fois ; c'est légèrement excessif, non ?</i><</if>></p>
+
+<h2> [[➡️ FIN |Conclusion]] </h2>
+
+
+:: Conclusion {"position":"2000,350","size":"100,100"}
+
+
+
+:: Conseil DSN {"position":"800,575","size":"100,100"}
+Vous appelez le 14.
+Au bout du fil, la technicienne vous apprend qu'à ce jour,<b>il n'y a aucune extension Chrome qui a été validée par la DSN</b> pour cet usage.
+
+Il existe des <b>fonctionnalités de Teams</b> pour ça, mais vous devez être l'organisatrice de la réunion pour pouvoir les utiliser, et <i>il faudra surement un peu de temps</i> avant de bien comprendre comment ça marche. 
+
+
+🔸 [[vous contactez votre cadre pour lui faire part de votre besoin |PC lent collègue]] 
+🔸 [[vous prévenez votre collègue qu'il ne devrait pas utiliser cette extension |Fin secure][$SHIELD +=1]]
+🔸 [[vous installez l'extension |Installation][$THUG +=1]]
+
+
+
+:: Conseil collègue {"position":"800,175","size":"100,100"}
+Votre collègue vous assure que <i>c'est parfaitement sécurisé</i> et que <i>ça fonctionne très bien</i>. Il n'a jamais eu de problème, et cela lui permet de gagner un temps fou au quotidien !
+
+Vous cherchez l'extension sur le Chrome Web Store, et trouvez ces informations : 
+<img src="images/extension1.png">
+
+🔸 [[vous insistez ; cette extension est suspecte et il devrait la désinstaller |Fin secure][$SHIELD +=1]]
+🔸 [[vous ne savez pas quoi penser ; vous demandez conseil à la DSN |Conseil DSN][$CAU += 1]]
+🔸 [[ces informations vous rassurent ; vous décidez finalement de l'installer également |Installation]]
+
+
+:: Fin détection {"position":"1625,325","size":"100,100"}
+<p>L'extension de retranscription et résumé de réunion Teams <b>était bien une extension malveillante</b> !!
+<u>Vous avez bien fait de prévenir la DSN. </u></p>
+
+<p>Dès le lendemain, un technicien est envoyé dans vos locaux pour <b>vérifier les PC de tous les membres</b> de l'équipe. 
+En plus de les remettre en conformité, il vous montre rapidement qu'une fonctionnalité de Teams prévue à cet effet est déjà incluse dans l'application.
+Vous vous sentez tous <i>un peu bête</i>, mais ces événements mettent en lumière à quel point la rédaction des comptes rendus de réunions, trop fréquentes et trop longues, mettent en difficulté les membres de votre équipe. </p>
+
+<p>Votre cadre décide de <b>contacter le service formation de la DSN</b> pour organiser des ateliers <i>Gestion des réunions avec Teams</i>, afin de vous aidez, vous et vos collègues, à mieux prendre en main le logiciel et ses fonctionnalités de transcription. </p>
+
+<p>La DSN est intervenue à temps, mais <b>le CHU a frôlé de peu l'incident majeur</b>. </p>
+
+CAU = $CAU
+AMI = $AMI
+SHIELD = $SHIELD
+DENI = $DENI
+INSTALL = $INSTALL
+SCRED = $SCRED
+THUG = $THUG
+CGT = $CGT
+
+
+:: Fin piratage {"position":"1625,450","size":"100,100"}
+<p>Les jours s'enchaînent, comme les mails d'alertes de la DSN, qui a décidément l'air d'être <b>mise en difficulté</b> par cette histoire d'extension malveillante.</p>
+
+<p>Alors que vous contenez votre énervement face à votre PC qui rame, <i>encore</i>, votre collègue vous interpelle : 
+<i>« Tu peux arrêter de m'envoyer tes liens de partage SharePoint qui marchent jamais ? Je suis en face de toi, si tu as un doc à me montrer juste dis le moi, je viendrai voir directement sur ton PC ! » </i>
+
+Vous prenez conscience avec horreur que, finalement, <i>peut être</i> que cette extension de transcription Teams n'était <i>pas si sécurisée que ça.</i> </p>
+
+<p>Vous <u>prévenez la DSN</u>. <b>Tous</b> les PC de votre équipe sont <b>mis en quarantaine</b>, et vous vous retrouvez tous pris dans une suite d'événements chronophages et épuisants. 
+
+Tout le monde vous dit que <i>ça aurait pu arriver à n'importe qui</i>, mais vous vous sentez particulièrement bête d'être à l'origine de toute cette cohue. </p>
+
+<p>Malgré tout, la DSN est intervenue à temps ; <b>le CHU a évité de peu l'incident majeur</b>. </p>
+CAU = $CAU
+AMI = $AMI
+SHIELD = $SHIELD
+DENI = $DENI
+INSTALL = $INSTALL
+SCRED = $SCRED
+THUG = $THUG
+CGT = $CGT
+
+
+:: Fin piratage collègue {"position":"1625,575","size":"100,100"}
+Les jours s'enchaînent, comme les mails d'alertes de la DSN, qui a décidément l'air d'être mise en difficulté par cette histoire d'extension malveillante.
+
+Vous recevez un nième mail de partage de document SharePoint de votre collègue, qui se trouve pourtant dans le même bureau que vous. Vous essayez d'accéder au document ; vous vous authentifiez et, comme toutes les fois précédentes, le document est inaccessible. Vous l'interpellez :
+« Tu peux arrêter de m'envoyer tes liens de partage SharePoint qui marchent jamais ? Je suis en face de toi, si tu as un doc à me montrer juste dis le moi, je viendrai voir directement sur ton PC ! »
+
+Il ne comprend pas, et assure ne rien vous avoir envoyé. Ensemble, vous prenez conscience avec horreur que, finalement, peut être que cette extension de transcription Teams n'était pas si sécurisée que ça. 
+
+Vous prévenez la DSN. 
+Comme le reste de l'équipe, votre PC est mis en quarantaine et vous retrouvez tous pris dans une suite d'événements chronophages et épuisants. 
+
+Vous êtes secrètement un peu soulagée de ne pas être la personne qui s'est faite avoir, même si au fond, vous savez que ça aurait très bien pu être vous. 
+
+CAU = $CAU
+AMI = $AMI
+SHIELD = $SHIELD
+DENI = $DENI
+INSTALL = $INSTALL
+SCRED = $SCRED
+THUG = $THUG
+CGT = $CGT
+
+
+:: Fin secure {"position":"1625,200","size":"100,100"}
+<p>Vous <b>faites le point avec les autres</b> ; les comptes rendus de réunion représentent une charge de travail trop élevée, au vu des autres activités de l'équipe. 
+Vous n'avez ni le temps ni les compétences pour apprendre par vous même comment utiliser les fonctionnalités de transcription natives de Teams, et <u>vous ne souhaitez pas prendre le risque d'installer des outils hasardeux</u>. 
+Mais vous ne pouvez pas continuer comme ça. </p>
+
+<p>Vous faites part de la situation à votre cadre, qui décide d'organiser des modules de formation <i>Gestion des réunions avec Teams</i> avec la DSN et d'<b>aménager vos emplois du temps</b> pour que toute l'équipe puisse y participer. 
+En attendant, il prend sur lui de rédiger les comptes rendus des réunions, sachant utiliser la transcription Teams. </p>
+
+<p>Dans les jours qui suivent, vous apprendrez que tous les PC de l'équipe voisine ont été mis en quarantaine. 
+Toute l'équipe avait installé une extension vérolée.
+
+La DSN est intervenue à temps, mais <b>le CHU a frôlé de peu l'incident majeur</b>. </p>
+
+<p>Au café, vous et vos collègues vous félicitez d'avoir su <b><u>faire collectivement les bons choix</u>.</b> </p>
+
+CAU = $CAU
+AMI = $AMI
+SHIELD = $SHIELD
+DENI = $DENI
+INSTALL = $INSTALL
+SCRED = $SCRED
+THUG = $THUG
+CGT = $CGT
+
+
+:: InitVar {"position":"175,350","size":"100,100"}
+<<set $CAU = 0>>
+<<set  $AMI = 0>>
+<<set  $SHIELD = 0>>
+<<set  $DENI = 0>>
+<<set  $INSTALL = 0>>
+<<set $SCRED = 0>>
+<<set $THUG = 0>>
+<<set $CGT = 0>>
+
+<<goto "Réunion">>
+
+
+:: Installation {"position":"975,325","size":"100,100"}
+Lorsque vous lancez l'installation, Chrome affiche les <b>permissions</b> demandées par l'extension :
+
+<img src="images/extension2.png">
+
+🔸 [[vous faites marche arrière et demandez conseil auprès de la DSN |Conseil DSN][$CAU += 1]]
+🔸[[vous acceptez et installez l'extension |PC lent][$INSTALL +=1; $DENI += 1]]
+🔸 [[vous paniquez et vous adressez à votre collègue |Conseil collègue][$AMI +=1]] 
+
+
+
+
+:: PC lent {"position":"1200,550","size":"100,100"}
+Après quelque temps, vous constatez que <b>votre PC est assez lent</b>, particulièrement quand vous utilisez Chrome.
+
+🔸 [[vous pestez contre le CHU, qui ne remplace les PC que lorsqu'ils sont antiques ou cassés |Alerte DSN][$CGT +=1; $DENI += 1]]
+🔸[[vous contactez le 14 |Fin détection][$CAU += 1]]
+🔸 [[vous faites avec, comme d'habitude|Alerte DSN][$DENI += 1]]
+
+
+:: PC lent collègue {"position":"1200,325","size":"100,100"}
+Après quelque temps, vous entendez votre collègue se plaindre que <i>son PC est très lent</i>, particulièrement quand il utilise Chrome.
+
+🔸[[vous pestez ensemble contre le CHU, qui ne remplace les PC que lorsqu'ils sont antiques ou cassés|Alerte DSN collègue][$CGT +=1]]
+🔸[[vous l'incitez à contacter le 14, quitte à le faire ensemble |Fin détection][$SHIELD +=1; $CAU += 1]]
+🔸[[vous compatissez ; vous aussi, vous avez souvent des problèmes avec votre PC |Alerte DSN collègue]]
+
+
+:: Réunion {"position":"500,375","size":"100,100"}
+Après une <b>réunion Teams</b> particulièrement longue, vous vous rappelez avec horreur que <b>c'était à vous de rédiger le compte rendu</b>. 
+
+<i>Vos notes sont incomplètes</i> ; vous interrogez vos collègues à ce sujet. 
+
+L'un d'entre eux vous propose de vous fournir la transcription complète ; en effet, il a installé une <b>extension Chrome</b> incroyable qui génère automatiquement la transcription et le résumé des réunions Teams. 
+C'est ce qu'il utilise quand c'est à lui de faire le compte rendu ; <i>ça marche très bien !</i>
+
+🔸 [[vous cherchez une solution officielle auprès de la DSN |Conseil DSN][$CAU += 1]] 
+🔸 [[vous demandez à votre collègue si l'extension est sécurisée |Conseil collègue][$AMI +=1]]
+🔸 [[vous installez l'extension |Installation]]
+

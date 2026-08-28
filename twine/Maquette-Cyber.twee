@@ -1,0 +1,385 @@
+:: StoryTitle
+Maquette-Cyber
+
+
+:: StoryData
+{
+  "ifid": "CB24211E-F18C-4342-A014-F5E66834A02F",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Début",
+  "zoom": 1
+}
+
+
+:: Bureau_Partagé {"position":"650,400","size":"100,100"}
+Au quotidien :
+<ul>
+<li>[[vous échangez souvent vos pc et vos places entre collègues->Mail][$partage=1; $impact += 1]]</li>
+<li>[[vous laissez toujours votre session déverouillée->Mail][$partage=1; $impact += 2]]</li>
+<li>[[vous faites attention à verrouiller votre pc quand vous quittez le poste, même si c'est contraignant|Mail]]</li>
+<li>[[vous oubliez parfois de verrouiler votre session, même si vous essayer de faire attention->Mail][$impact += 1]]</li>
+</ul>
+
+
+:: Bureau_Solo {"position":"650,500","size":"100,100"}
+Au quotidien :
+<ul>
+<li>[[vous laissez toujours votre session déverouillée->Mail][$partage=1; $impact += 1]]</li>
+<li>[[vous faites attention à verrouiller votre pc quand vous quittez le poste, même si c'est contraignant|Mail]]</li>
+<li>[[vous oubliez parfois de verrouiler votre session, même si vous essayer de faire attention|Mail]]</li>
+</ul>
+
+
+:: Collègues {"position":"850,150","size":"100,100"}
+<<set _p = random(1,100>>
+
+<<if _p <= 30>>
+		<<goto "Collègues-O">>
+	<<else>>
+		<<goto "Collègues-N">>
+<</if>>
+
+
+:: Collègues-N {"position":"975,250","size":"100,100"}
+Elles vous disent de vous méfier parce que des pirates utilisent souvent des mails qui ont l'air vrais pour vous duper et vous pirater. 
+
+<ul>
+<li>[[vous leur faites confiance et cliquez "signaler ce message comme suspect"->Phishing][$conseil=0; $clic=0; $alert=1]]</li>
+<li>[[vous ignorez le mail et partez en week end->Phishing][$conseil=0; $clic=0; $alert=0]]</li>
+<li>[[vous regardez vos mails plus anciens et constatez que microsoft envoie des mails similaires lorsque vos collègues vous envoient des invitations teams. Vous décidez de cliquer sur le lien, en vous disant que si ça vous renvoie vers un site bizarre vous le fermerez immédiatement->PageWeb][$clic=1]]</li>
+<li>[[vous paniquez et appelez l'équipe cyber->Phishing][$conseil=0; $clic=0; $alert=1]]</li>
+</ul>
+
+
+
+:: Collègues-O {"position":"1050,150","size":"100,100"}
+Elles vous confirment qu'elles reçoivent souvent des mails comme ça, et vous conseille de renouveler votre licence maintenant pour ne pas vous retrouver dans la galère lundi matin.
+
+<ul>
+<li>[[vous leur faites confiance et cliquez sur le lien->->PageWeb][$clic=1]]</li>
+<li>[[vous décidez malgré tout de cliquer sur "signaler ce message comme suspect"->Phishing][$conseil=1; $clic=0; $alert=1]]</li>
+<li>[[vous ignorez quand même le mail et partez en week end->Phishing][$conseil=1; $clic=0; $alert=0]]</li>
+<li>[[vous regardez vos mails plus anciens et constatez qu'effectivement microsoft envoie des mails similaires lorsque vos collègues vous envoient des invitations teams. Vous cliquez sur le lien->PageWeb][$clic=1]]</li>
+<li>[[vous paniquez et appelez l'équipe cyber->Phishing][$conseil=1; $clic=0; $alert=1]]</li>
+</ul>
+
+
+:: Cyber {"position":"1600,300","size":"100,100"}
+<<set _c = (random(1,100) + Number($alert)*10)>>
+
+<<if _c <= 50>>
+		<<goto "Cyber-S">>
+	<<elseif _c >= 90>>
+		<<goto "Cyber-C">>
+	<<else>>
+		<<goto "Cyber-N">>
+<</if>>
+
+
+:: Cyber-C {"position":"1750,400","size":"100,100"}
+Afin d'identifier le point d'entrée du virus, de le contenir et d'éviter de se trouver dans la même situation à l'avenir, le membre de l'équipe cyber vous demande si vous avez constaté quelque chose de suspect récemment.
+Cela pourrait être quelque chose que vous ou vos collègues ont téléchargé, des mails étranges que vous auriez reçu, vous proposant de cliquer sur un lien, ce genre d'événement.
+
+Avant que vous ne puissiez répondre, il vous rappelle, excédé, que la DSN organisent régulièrement des formations et des mets à disposition de nombreuses documentations concernant la sécurité informatique. Malgré tout cela, ce n'est pas la première fois que des membres de votre service se font avoir par des arnaques aussi basiques que des mails de phishing. 
+Il vous rappelle que, travaillant dans un hôpital, vous manipulez au quotidien des données sensibles ; il serait peut être temps que les utilisateurs prennent conscience de la faille de sécurité que leurs mauvaises habitudes représentent, et qu'ils se responsabilisent. Quand vous réussissez finalement à en placer une, vous :
+
+<ul>
+<li>[[lui donnez toutes les informations que vous avez, en espérant que cela ne vous retombe pas dessus par la suite->Traitement]]</li>
+<li>[[êtes assez tendu ; vous lui faites un résumé succin des événements. Vous préférez ne pas vous étendre sur les éléments dont vous n'êtes pas sur à 100% ou qui risqueraient de vous mettre vous ou vos collègues en difficultés par la suite->Traitement][$impact += 1]]</li>
+<li>[[constatez que cette personne n'est en rien votre allié et sentez qu'on va vous reprocher vos actions ; vous restez évasif, feignez l'oublie et essayez de noyer le poisson. Il est hors de question que vous ou vos collègues soient pris pour cible pour une petite erreur d'inattention->Traitement][$impact += 3]]</li>
+<li>[[n'avez vraiment pas que ça à faire ; vous dîtes que vous voyez régulièrement passer des mails étranges, mais que rien n'a attiré votre attention plus que ça. Vous mettez un terme à l'appel, revenez à vos activités et tâchez d'oublier cet échange désagréable ->Traitement][$impact += 2]]</li>
+</ul>
+
+
+:: Cyber-N {"position":"1750,300","size":"100,100"}
+Afin d'identifier le point d'entrée du virus, de le contenir et d'éviter de se trouver dans la même situation à l'avenir, le membre de l'équipe cyber vous demande si vous avez constaté quelque chose de suspect récemment.
+Cela pourrait être quelque chose que vous ou vos collègues ont téléchargé, des mails étranges que vous auriez reçu, vous proposant de cliquer sur un lien, ce genre d'événement.
+
+Il adopte un ton égal qui vous laisse à penser qu'il essaie de comprendre ce qu'il s'est passé plus qu'il ne cherche un coupable. Vous :
+
+<ul>
+<li>[[lui parlez du mail que vous avez reçu la semaine précédente, et lui racontez ce qu'il s'est passé sans soucis, car vous vous en souvenez assez bien->Traitement]]</li>
+<li>[[êtes stressé et un peu confus ; vous essayez de lui raconter au mieux mais la temporalité n'est plus claire pour vous et vous vous emmélez->Traitement][$impact += 1]]</li>
+<li>[[avez l'impression d'être accusé et avez peur qu'on vous reproche vos actions ; vous restez évasif, feignez l'oublie et essayez de noyer le poisson->Traitement][$impact += 2]]</li>
+<li>[[n'avez vraiment pas que ça à faire ; vous dîtes que vous voyez régulièrement passer des mails étranges, mais que rien n'a attiré votre attention plus que ça. Vous mettez un terme à l'appel et revenez à vos activités ->Traitement][$impact += 2]]</li>
+</ul>
+
+
+
+:: Cyber-S {"position":"1750,200","size":"100,100"}
+Afin d'identifier le point d'entrée du virus, de le contenir et d'éviter de se trouver dans la même situation à l'avenir, le membre de l'équipe cyber vous demande si vous avez constaté quelque chose de suspect récemment.
+Cela pourrait être quelque chose que vous ou vos collègues ont téléchargé, des mails étranges que vous auriez reçu, vous proposant de cliquer sur un lien, ce genre d'événement.
+
+Il prend le temps de vous rappelez qu'il est fréquent que des agent cliquent par inadvertance sur un lien ou un fichier sans se rendre compte qu'il était suspect. Bien sur, idéalement, il faudrait prendre le temps d'analyser l'élément avant de cliquer de dessus ; mais les membres de la il est parfaitement lucide sur les conditions de travail des agents.
+Il essaie de vous rassurer, en vous disant que cela peut arriver à tout le monde (même les membres de la DSN se font parfois avoir par les fausses campagnes de phishing qu'ils organisent !), l'important étant de gérer la crise ensemble pour la régler au plus vite et dans les meilleures conditions. Vous :
+
+<ul>
+<li>[[lui parlez du mail que vous avez reçu la semaine précédente, et lui racontez ce qu'il s'est passé sans soucis, car vous vous en souvenez assez bien->Traitement]]</li>
+<li>[[restez méfiant ; vous avez l'impression que, derrière son empathie, il essaie de trouver un coupable. Vous avez peur qu'on vous reproche vos actions ; vous restez évasif, feignez l'oublie et essayez de noyer le poisson->Traitement][$impact += 2]]</li>
+<li>[[n'avez vraiment pas que ça à faire, bien que vous appréciez sa gentillesse ; lui donnez rapidement les informations parcellaires dont vous vous souvenez, puis vous mettez un terme à l'appel et revenez à vos activités ->Traitement][$impact += 1]]</li>
+</ul>
+
+
+:: Début {"position":"500,100","size":"100,100"}
+<title>Scénario Cyber</title>
+<h1>Mail de Phishing</h1>
+
+Vous allez commencer à jouer une histoire qui pourrait vous arriver au quotidien. 
+<b>Tous</b> vos choix auront des conséquences sur la suite des événements.
+
+A noter qu'<i>une partie des événements sont aléatoires</i>. Vos actions peuvent parfois en augmenter la probabilité, mais il reste possible que des mauvaises actions n'entrainent pas de conséquences, ou a contrario qu'une petite erreur ait de lourdes conséquences. 
+
+<h2>Bon jeux ! </h2>
+
+[[suite|InitVar]] 
+
+
+:: Fin-LI {"position":"2050,400","size":"100,100"}
+<h3>Votre score d'impact est de : $impact </h3>
+
+Vous avez fait des mauvais choix, et il est possible que le hasard n'ai pas été très tendre avec vous non plus (une partie des événements étant aléatoires). Pour vous renseigner, de nombreuses ressources sont à votre disposition, comme la lettre cyber, envoyée régulièrement par mail, et [mettre les autres ressources].
+
+Gardez cependant à l'esprit que, selon votre fonction, il sera plus ou moins difficile d'appliquer les bonnes pratiques de cybersécurité au quotidien.
+Par exemple, nous avons déjà rencontré un cas de phishing réussi où l'on se demandait sérieusement comment les gens avaient pu se faire avoir par un mail d'aussi piètre qualité (fautes d'orthographe, discours confus, nombreuses incohérences, ...). Après avoir échangé avec les personnes concernées, il s'est avéré que des patients bien réels pouvaient être à l'origine de mails si approximatifs qu'ils auraient paru encore plus suspects que le message incriminé. 
+
+En cybersécurité comme ailleurs, l'informatique est un support de vos pratiques professionnelles, y compris quand celles-ci vous rendent plus "attaquable" de par leur nature ; les attentes à votre égard sont donc à moduler afin qu'elles restent atteignables de le cadre de votre fonction.
+
+En cas de doutes, la meilleure chose à faire reste de contacter l'équipe cybersécurité. 
+
+<img src="../images/Score-Impact.png">
+
+Dans les décisions que vous avez prises, certaines ont augmenté l'impact de l'attaque (comme le fait de ne pas la déclarer, ralentissant l'identification de la menace). 
+En effet, même si vous ne vous faites pas avoir vous même par les tentatives de piratage, vos décisions vont également impacter vos collègues, de la même manière que vos collègues ont pu vous inciter ou vous dissuader de cliquer sur le lien. 
+
+A noter que certains événements sont aléatoires, comme le fait de tomber sur une personne de la cyber plus ou moins sympa.
+
+<h3>Merci d'avoir participé à ce jeu !</h3>
+
+
+:: Fin-MI {"position":"2050,300","size":"100,100"}
+<h3>Votre score d'impact est de : $impact </h3>
+
+Vous avez quelques mauvaises habitudes qui n'arrangent pas les choses. 
+Certaines peuvent être corrigées, avec quelques efforts et un peu de formation. 
+
+D'autres, sont peut être inhérentes à votre fonction. 
+Par exemple, nous avons déjà rencontré un cas de phishing réussi où l'on se demandait sérieusement comment les gens avaient pu se faire avoir par un mail d'aussi piètre qualité (fautes d'orthographe, discours confus, nombreuses incohérences, ...). Après avoir échangé avec les personnes concernées, il s'est avéré que des patients bien réels pouvaient être à l'origine de mails si approximatifs qu'ils auraient paru encore plus suspects que le message incriminé. 
+
+En cybersécurité comme ailleurs, l'informatique est un support de vos pratiques professionnelles, y compris quand celles-ci vous rendent plus "attaquable" de par leur nature ; les attentes à votre égard sont donc à moduler afin qu'elles restent atteignables de le cadre de votre fonction.
+
+<img src="../images/Score-Impact.png">
+
+Dans les décisions que vous avez prises, certaines ont augmenté l'impact de l'attaque (comme le fait de ne pas la déclarer, ralentissant l'identification de la menace). 
+En effet, même si vous ne vous faites pas avoir vous même par les tentatives de piratage, vos décisions vont également impacter vos collègues, de la même manière que vos collègues ont pu vous inciter ou vous dissuader de cliquer sur le lien. 
+
+A noter que certains événements sont aléatoires, comme le fait de tomber sur une personne de la cyber plus ou moins sympa.
+
+
+<h3>Merci d'avoir participé à ce jeu !</h3>
+
+
+:: Fin-OK {"position":"2050,500","size":"100,100"}
+<h3>Bravo,
+Vous n'avez pas cédé aux sirènes du mail de phishing. </h3>
+
+
+:: Fin-SI {"position":"2050,200","size":"100,100"}
+<h3>Votre score d'impact est de : $impact </h3>
+
+Une crise cyber a bien eu lieu, mais vous avez su aider pour la résoudre au mieux. 
+
+<img src="../images/Score-Impact.png">
+
+Dans les décisions que vous avez prises, certaines ont augmenté l'impact de l'attaque (comme le fait de ne pas la déclarer, ralentissant l'identification de la menace). 
+En effet, même si vous ne vous faites pas avoir vous même par les tentatives de piratage, vos décisions vont également impacter vos collègues, de la même manière que vos collègues ont pu vous inciter ou vous dissuader de cliquer sur le lien. 
+
+A noter que certains événements sont aléatoires, comme le fait de tomber sur une personne de la cyber plus ou moins sympa.
+
+
+<h3>Merci d'avoir participé à ce jeu !</h3>
+
+
+:: Habitudes-TypePC {"position":"500,400","size":"100,100"}
+Vous utilisez :
+<ul>
+<li>[[un poste partagé|Poste_Partagé]] </li>
+<li>[[un poste individuel dans un bureau partagé|Bureau_Partagé]] </li>
+<li>[[un poste individuel dans un bureau individuel|Bureau_Solo]] </li>
+</ul>
+
+
+:: InitVar {"position":"500,250","size":"100,100"}
+<<set $partage = 0>>
+<<set  $clic = 0>>
+<<set  $alert = 0>>
+<<set  $transfert = 0>>
+<<set  $conseil = 0>>
+<<set $jour = "">>
+<<set $impact = 0>>
+
+<<goto "Habitudes-TypePC">>
+
+
+
+:: Mail {"position":"800,400","size":"100,100"}
+Après une semaine chargée, vous trouvez finalement le temps pour vous poser, vous faire une boisson chaude et consulter vos mails avant de partir en week end. 
+Au milieu des mails de communication du CHU et de ceux de votre cadre, un message attire votre attention :
+<img src="../images/Mail-M365_Licence.png" width=140% height=140%>
+Le délai arrivera à échéance demain, alors que vous serez en week end ; vous devez gérer ça maintenant. 
+
+<ul>
+<li>[[vous cliquez sur "signaler ce message comme suspect". On ne vous la fait pas à vous.->Phishing][$clic=0; $alert=1]]</li>
+<li>[[vous ignorez le mail et partez en week end->Phishing][$clic=0; $alert=0]]</li>
+<li>[[vous transférez le mail à vos collègues pour avoir leur avis->Collègues][$transfert=1]]</li>
+<li>[[vous regardez vos mails plus anciens et constatez que microsoft envoie des mails similaires lorsque vos collègues vous envoient des invitations teams. Vous cliquez sur le lien->PageWeb][$clic=1]]</li>
+<li>[[vous paniquez et appelez l'équipe cyber->Phishing][$clic=0; $alert=1]]</li>
+</ul>
+
+
+:: PageWeb {"position":"1150,400","size":"100,100"}
+Après avoir cliqué sur le lien, une page web s'ouvre automatiquement dans votre navigateur. Elle est blanche et il y a juste écrit "Renouvellement de licence validé." au milieu. 
+
+<ul>
+<li>[[vous finissez ce que vous avez à faire, fermez tout, éteignez votre pc et partez en week end->Phishing][$alert=0]]</li>
+<li>[[vous paniquez et appelez l'équipe cyber->Phishing][$alert=1]]</li>
+</ul>
+
+
+:: Phishing {"position":"1300,300","size":"100,100"}
+<<set _cas = $transfert + "-" + $conseil + "-" + $partage>>
+
+<<switch _cas>>
+
+<<case "1-1-1">>
+	<<set _user = 16>>
+	<<set _ok = 76>>
+	<<break>>
+
+<<case "1-1-0">>
+	<<set _user = 6>>
+	<<set _ok = 66>>
+	<<break>>
+
+<<case "1-0-1">>
+	<<set _user = 13>>
+	<<set _ok = 43>>
+	<<break>>
+
+<<case "1-0-0">>
+	<<set _user = 3>>
+	<<set _ok = 33>>
+	<<break>>
+
+<<case "0-1-1">>
+	<<set _user = 14>>
+	<<set _ok = 54>>
+	<<break>>
+
+<<case "0-1-0">>
+	<<set _user = 4>>
+	<<set _ok = 44>>
+	<<break>>
+
+<<case "0-0-1">>
+	<<set _user = 11>>
+	<<set _ok = 21>>
+	<<break>>
+
+<<case "0-0-0">>
+	<<set _user = 1>>
+	<<set _ok = 11>>
+	<<break>>
+
+<<default>>
+	<<set _user = 0>>
+	<<set _ok = 100>>
+	<<break>>
+
+<</switch>>
+
+<<if $alert == 1>>
+	<<set $jour = "lundi" >>
+<<elseif $alert == 0>>
+	<<set $jour = "jeudi" >>
+<</if>>    
+
+<<set _r = random(1,100)>>
+
+<<if $clic == 1>>
+	<<goto "Phishing-User">>
+<<elseif $clic == 0>>
+	<<if _r <= _user>>
+		<<goto "Phishing-User">>
+	<<elseif _r >= _ok>>
+		<<goto "Fin-OK">>
+	<<else>>
+		<<goto "Phishing-Other">>
+	<</if>>
+<</if>>
+
+
+:: Phishing-Other {"position":"1450,250","size":"100,100"}
+Le $jour suivant, vous êtes contacté par l'équipe cybersécurité. 
+L'identité d'une de vos collégues a été usurpée ; son compte a envoyé des messages en masse à d'autres membres du CHU. 
+En vérifiant votre boite mail, vous constatez qu'effectivement, votre collègue vous a envoyé des mails étranges où elle vous demande d'ouvrir des fichiers de "résultats patients" dans un format que vous ne reconnaissez pas. 
+
+[[Suite|Cyber]] 
+
+
+:: Phishing-User {"position":"1450,350","size":"100,100"}
+Le $jour suivant, vous êtes contacté par l'équipe cybersécurité. 
+
+Nombre de vos collègues a reçu des messages où vous leur demandiez d'ouvrir des fichiers de "résultats patients" dans un format que vous ne reconnaissez pas. 
+Vous niez être à l'origine de ces envois, bien que vous constatiez que les messages sont bien présents dans l'onglet "envoyés" de votre boite mail. 
+
+L'équipe cyber soupçonne que vous subissiez une usurpation d'identité, due au vol de votre identifiant et votre mot de passe par un virus. 
+
+[[Suite|Cyber]]
+
+
+:: Poste_Partagé {"position":"650,300","size":"100,100"}
+Au quotidien :
+<ul>
+<li>[[vous êtes souvent à courir partout, c'est fréquent que les gens ne se déconnectent pas et utilisent la session des autres->Mail][$partage=1; $impact += 2]]</li>
+<li>[[vous faites attention à toujours vous déconnecter quand vous quittez le poste, même si c'est contraignant |Mail]]</li>
+<li>[[vous oubliez parfois de fermer votre session, même si vous essayer de faire attention |Mail][$impact += 1]]</li>
+</ul>
+
+
+
+
+:: Traitement {"position":"1900,300","size":"100,100"}
+<<if $alert == 0>>
+	$impact += 2
+<</if>>
+
+
+<<if $impact <= 2>>
+	<<goto "Fin-SI">>
+<<elseif $impact >=5>>
+	<<goto "Fin-LI">>
+<<else>>
+	<<goto "Fin-MI">>
+<</if>>
+
+
+:: Variables {"position":"1000,600","size":"100,100"}
+$fonction = [PS;AF;PA;ST]
+$partage = [0;1]
+$clic = [0;1]
+$alert = [0;1]
+$transfert = [0;1]
+$conseil = [0;1]
+$jour = ["lundi";"jeudi"]
+
+
+impact +x si :
+    même mdp partout +2
+    mensonge +2
+    partage sessions +3
+    $alert=0 +2
+    oublie info/discours confus +1
+   
+   $impact = [1;7]
+   

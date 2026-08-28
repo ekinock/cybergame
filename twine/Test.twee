@@ -1,0 +1,93 @@
+:: StoryTitle
+Test
+
+
+:: StoryData
+{
+  "ifid": "AC8F7919-1F98-464E-BF8F-BF30F2F54930",
+  "format": "SugarCube",
+  "format-version": "2.37.3",
+  "start": "Untitled Passage",
+  "zoom": 1
+}
+
+
+:: Conclusion {"position":"1025,475","size":"100,100"}
+
+
+
+:: Setup - 0 {"position":"325,75","size":"100,100"}
+<<set $CAU = 0>>
+<<set  $AMI = 0>>
+<<set  $SHIELD = 0>>
+<<set  $DENI = 0>>
+<<set  $INSTALL = 0>>
+<<set $SCRED = 0>>
+<<set $THUG = 0>>
+<<set $CGT = 0>>
+
+
+:: Setup - Total1 {"position":"575,75","size":"100,100"}
+<<set $CAU = 0>>
+<<set  $AMI = 0>>
+<<set  $SHIELD = 0>>
+<<set  $DENI = 2>>
+<<set  $INSTALL = 2>>
+<<set $SCRED = 1>>
+<<set $THUG = 1>>
+<<set $CGT = 1>>
+
+
+:: Setup - Total2 {"position":"725,75","size":"100,100"}
+<<set $CAU = 11>>
+<<set  $AMI = 15>>
+<<set  $SHIELD = 0>>
+<<set  $DENI = 1>>
+<<set  $INSTALL = 1>>
+<<set $SCRED = 0>>
+<<set $THUG = 1>>
+<<set $CGT = 1>>
+
+
+:: Untitled Passage {"position":"900,350","size":"100,100"}
+<<set $CAU = 0>>
+<<set  $AMI = 0>>
+<<set  $SHIELD = 0>>
+<<set  $DENI = 2>>
+<<set  $INSTALL = 2>>
+<<set $SCRED = 1>>
+<<set $THUG = 1>>
+<<set $CGT = 1>>
+
+<<goto test>>
+
+
+:: test {"position":"1025,350","size":"100,100"}
+<h1> Badges </h1>
+<p> En fonction des décisions que vous avez pris, vous avez obtenu certains <i>"badges"</i> ; c'est un peu la même chose que les succès que l'on peut débloquer dans les jeux vidéos. 
+<i>Les badges ont une fonction humoristique.</i></p>
+<p><<if $CAU == 0 && $AMI == 0>>
+🧠 <b>Expert autodiag</b> - Qu'est-ce qui pourrait mal se passer, hein ?
+<i>Vous n'avez pas jugé bon de demander conseil à qui que ce soit.</i><</if>>
+<<if $SHIELD == 0>>
+🏝️ <b>Joueur solo</b> - Quel dommage que vous ne soyez pas tout seul dans l'équipe
+<i>Vous n'avez pas cherché à prévenir votre collègue qu'il faisait n'importe quoi.</i><</if>>
+<<if $DENI >= 1>>
+🪿 <b>Autruche émérite</b> - Qui aurait pu prédire ?
+<i>Vous avez brillamment ignoré toutes les alertes et les éléments suspects.</i><</if>>
+<<if $CGT >= 1>>
+📢 <b>Futur gréviste</b> - En plus, la qualité de la cantine a quand même vachement baissé
+<i>Vous avez râlé contre le CHU et les restrictions budgétaires.</i><</if>>
+<<if $CAU == 0 && $INSTALL >= 1>>
+🥷 <b>Fauteur furtif</b> - Au-dessus de tout soupçon 
+<i>Vous avez désinstallé l'extension "discrètement" avant l'intervention de la DSN.</i><</if>>
+<<if $THUG >= 1>>
+🏴‍☠️ <b>Thug life</b> - Au-dessus des lois 
+<i>Vous avez demandé conseil au CAU et décidé d'ignorer son conseil. Malin.</i><</if>>
+<<if $AMI >= 10>>
+🐑 <b>Animal grégaire</b> - C'est pas moi, c'est le collègue qui m'a dit
+<i>Vous avez demandé conseil $AMI fois à votre collègue ; prenez une décision, enfin !</i><</if>>
+<<if $CAU >= 10>>
+🛟 <b>A besoin de parler</b> - 2 600 tickets EasyVista au compteur. En cours.
+<i>Vous avez appelé le CAU $CAU fois ; c'est légèrement excessif, non ?</i><</if>></p>
+<h2> [[➡️ FIN |Conclusion]] </h2>
