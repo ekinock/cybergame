@@ -1,14 +1,73 @@
+/* color var def */
+
+:root {
+    --lightgrey_clr: #d9d9d9;
+    --darkgrey_clr: #626262;
+
+    --flot_light_clr: #4ccfd7;
+    --flot_clr: #00bac6;
+    --flot_dark_clr: #006076;
+
+    --flore_light_clr: #65dc81;
+    --flore_clr: #23cd4b;
+    --flore_dark_clr: #186c22;
+
+    --flamme_light_clr: #fbca5c;
+    --flamme_clr: #fab316;
+    --flamme_dark_clr: #b77400;
+
+    --flair_light_clr: #f482ad;
+    --flair_clr: #ef4d89;
+    --flair_dark_clr: #911244;
+
+    --faisan_light_clr: #4db4a3;
+    --faisan_clr: #00937c;
+    --faisan_dark_clr: #005a58;
+
+    --phare_light_clr: #f47a65;
+    --phare_clr: #ef4123;
+    --phare_dark_clr: #871810;
+
+    --fougere_light_clr: #93ad7b;
+    --fougere_clr: #668a44;
+    --fougere_dark_clr: #304e1e;
+
+    --figue_light_clr: #a080ae;
+    --figue_clr: #764a8c;
+    --figue_dark_clr: #402362;
+}
+
+/* =========================
+   FONT DEF              *
+   ========================= */
+
+.dm-sans-main {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+.dm-sans-bold {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+
 /* =========================
    STYLE GENERAL
    ========================= */
 
 body {
     margin: 0;
-    background: #111;
-    color: #eee;
+    background: black;
+    color: white;
 
-    font-family: Georgia, serif;
-    font-size: 18px;
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+
     line-height: 1.6;
 }
 
@@ -36,22 +95,69 @@ main {
     margin: 40px auto;
 }
 
+.scenario-menu a.flot {
+    background: var(--flot_clr);
+    color: black;
+}
+.scenario-menu a.flot:hover{
+    background: var(--flot_light_clr);
+}
+.scenario-menu a.flot:active{
+    background: var(--flot_dark_clr);
+}
+
+.scenario-menu a.flore {
+    background: var(--flore_clr);
+    color: black;
+}
+.scenario-menu a.flore:hover{
+    background: var(--flore_light_clr);
+}
+.scenario-menu a.flore:active{
+    background: var(--flore_dark_clr);
+}
+
+.scenario-menu a.flair {
+    background: var(--flair_clr);
+    color: black;
+}
+.scenario-menu a.flair:hover{
+    background: var(--flair_light_clr);
+}
+.scenario-menu a.flair:active{
+    background: var(--flair_dark_clr);
+}
+
+.scenario-menu a.flamme {
+    background: var(--flamme_clr);
+    color: black;
+}
+.scenario-menu a.flamme:hover{
+    background: var(--flamme_light_clr);
+}
+.scenario-menu a.flamme:active{
+    background: var(--flamme_dark_clr);
+}
+
 .scenario-menu a {
     display: block;
 
     padding: 15px 20px;
 
-    background: #292929;
-    color: white;
+    background: white;
+    color: black;
 
     text-decoration: none;
-    border-radius: 8px;
+/*     border-radius: 8px; */
 
     transition: background 0.2s;
 }
 
 .scenario-menu a:hover {
-    background: #444;
+    background: var(--lightgrey_clr);
+}
+.scenario-menu a:active {
+    background: var(--darkgrey_clr);
 }
 
 
@@ -64,4 +170,260 @@ img {
     height: auto;
     display: block;
     margin: 20px auto;
+}
+
+/* =========================
+ TWINE DEF
+ ========================= */
+
+/* Ui Bar Def */
+#ui-bar {
+    background-color: var(--lightgrey_clr);
+}
+#ui-bar h1{
+    color: black;
+    background-color: none;
+}
+#ui-bar-tray{
+    top:0px;
+}
+#ui-bar-tray button{
+    border: 0px;
+}
+#ui-bar-tray button:hover{
+    border: 0px;
+}
+
+/* Ui Bar Toggle Button Colors */
+#ui-bar-tray button#ui-bar-toggle{
+    color:white;
+    background-color: var(--faisan_clr);
+    width:11.5%;
+}
+#ui-bar-tray button#ui-bar-toggle:hover{
+    background-color: var(--faisan_light_clr);
+}
+#ui-bar-tray button#ui-bar-toggle:active{
+    background-color: var(--faisan_dark_clr);
+}
+
+/* Ui Bar Disabled Button Override */
+#ui-bar-tray button:disabled {
+    color:var(--lightgrey_clr)
+}
+
+/* Ui Bar History Buttons Colors */
+#ui-bar-history button#history-forward,#ui-bar-history button#history-backward{
+    color:white;
+    background-color: var(--figue_clr);
+}
+#ui-bar-history button#history-forward:hover,#ui-bar-history button#history-backward:hover{
+    background-color: var(--figue_light_clr);
+}
+#ui-bar-history button#history-forward:active,#ui-bar-history button#history-backward:active{
+    background-color: var(--figue_dark_clr);
+}
+#ui-bar-history button#history-forward:disabled,#ui-bar-history button#history-backward:disabled{
+    color:grey;
+    background-color: var(--figue_dark_clr);
+}
+
+/* Menu Items (Saves/Restart) borders override  */
+#menu ul{
+    border: 0px;
+}
+#menu li a{
+    border: 0px;
+}
+#menu li a:hover{
+    border: 0px;
+}
+#menu li:not(:first-child){
+    border: 0px;
+}
+
+/* Menu Items Colors & Text (Saves/Restart)  */
+#menu-item-restart a{
+    background-color: var(--phare_light_clr);
+
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+
+    margin-top:1em;
+}
+#menu-item-restart a:hover {
+    background-color: var(--phare_clr) !important ;
+}
+#menu-item-restart a:active {
+    background-color: var(--phare_dark_clr) !important ;
+}
+#menu-item-saves a{
+    background-color: var(--faisan_clr);
+
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+}
+#menu-item-saves a:hover {
+    background-color: var(--faisan_light_clr) !important ;
+}
+#menu-item-saves a:active {
+    background-color: var(--faisan_dark_clr) !important ;
+}
+
+/* Internal link override (choices links/ suite link) */
+/* display: inline-block to get a sized block, instead of a span */
+a.link-internal{
+    color: black;
+    background-color: var(--flair_light_clr);
+    padding:1ex;
+    margin-top: 1em;
+    display: inline-block;
+}
+a.link-internal:hover{
+    background-color: var(--flair_clr);;
+    text-decoration: none;
+}
+a.link-internal:active{
+    background-color: var(--flair_dark_clr);;
+    text-decoration: none;
+}
+
+/* Credits Button */
+a[href="credits/"]{
+    font-size: 0.65em;
+    color: black;
+    background-color: var(--lightgrey_clr);
+    padding:1ex;
+    margin-top: 1em;
+    display: inline-block;
+}
+a[href="credits/"]:hover{
+    background-color: var(--flot_light_clr);
+    text-decoration: none;
+}
+a[href="credits/"]:active{
+    background-color: var(--flot_clr);
+}
+
+/* UI Dialog (save panel/restart confirmation panel) */
+
+/*#ui-dialog{
+    outline: 5px solid var(--darkgrey_clr);
+}*/
+ul.buttons{
+    border: 0px !important;
+}
+table, th, tr{
+    border: 0px !important;
+}
+#ui-dialog-titlebar{
+    color:black;
+    background-color: var(--lightgrey_clr);
+    border: 0px;
+}
+#ui-dialog-body{
+    color:black;
+    background-color: var(--lightgrey_clr);
+    border: 0px;
+}
+#ui-dialog-body > h2{
+    color:black;
+    background-color: var(--lightgrey_clr)!important;
+    border-top: 2px solid var(--darkgrey_clr) !important;
+}
+
+/* button by id selector (id* = "string" to select all buttons with an id that contains the string) */
+
+button[id*="close"],button[id*="cancel"],button[id*="clear"],button[id*="delete"]{
+    color:white;
+    background-color: var(--phare_clr)!important;
+    border: 0px !important;
+    height:100% !important;
+}
+button[id*="close"]:hover,button[id*="cancel"]:hover,button[id*="clear"]:hover,button[id*="delete"]:hover{
+    background-color: var(--phare_light_clr)!important;
+}
+button[id*="close"]:active,button[id*="cancel"]:active,button[id*="clear"]:active,button[id*="delete"]:active{
+    background-color: var(--phare_dark_clr) !important;
+}
+button[id*="close"]:disabled,button[id*="cancel"]:disabled,button[id*="clear"]:disabled,button[id*="delete"]:disabled{
+    background-color: var(--phare_dark_clr) !important;
+    color:white !important;
+    opacity:10% !important;
+}
+
+button[id*="saves-save"],button[id*="saves-load"]{
+    background-color: var(--darkgrey_clr) !important;
+    border: 0px !important;
+    height:100% !important;
+}
+button[id*="saves-save"]:hover,button[id*="saves-load"]:hover{
+    background-color: var(--flore_dark_clr) !important;
+}
+button[id*="saves-save"]:active,button[id*="saves-load"]:active{
+    background-color: var(--flore_clr) !important;
+}
+
+button[id*="ok"]{
+    background-color: var(--flore_dark_clr);
+    border: 0px;
+    height:100%;
+}
+button[id*="ok"]:hover{
+    background-color: var(--flore_light_clr);
+}
+button[id*="ok"]:active{
+    background-color: var(--flore_clr);
+}
+
+button[id*="export"]{
+    background-color: var(--fougere_dark_clr);
+    border: 0px;
+    height:100%;
+}
+button[id*="export"]:hover{
+    background-color: var(--fougere_light_clr);
+}
+button[id*="export"]:active{
+    background-color: var(--fougere_clr);
+}
+
+button[id*="import"]{
+    background-color: var(--figue_dark_clr);
+    border: 0px;
+    height:100%;
+}
+button[id*="import"]:hover{
+    background-color: var(--figue_light_clr);
+}
+button[id*="import"]:active{
+    background-color: var(--figue_clr);
+}
+
+button[id*="disk-save"]{
+    background-color: var(--flot_dark_clr);
+    border: 0px;
+    height:100%;
+}
+button[id*="disk-save"]:hover{
+    background-color: var(--flot_light_clr);
+}
+button[id*="disk-save"]:active{
+    background-color: var(--flot_clr);
+}
+
+button[id*="disk-load"]{
+    background-color: var(--flair_dark_clr) !important;
+    border: 0px;
+    height:100%;
+}
+button[id*="disk-load"]:hover{
+    background-color: var(--flair_light_clr) !important;
+}
+button[id*="disk-load"]:active{
+    background-color: var(--flair_clr) !important;
 }
