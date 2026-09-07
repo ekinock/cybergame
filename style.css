@@ -55,6 +55,54 @@
 }
 
 /* =========================
+   TEXT COLORS
+   ========================= */
+
+.text-flot {
+    color: var(--flot_light_clr);
+}
+
+.text-flore {
+    color: var(--flore_light_clr);
+}
+
+.text-flair {
+    color: var(--flair_light_clr);
+}
+
+.text-flamme {
+    color: var(--flamme_light_clr);
+}
+
+/* =========================
+   CUSTOM TITLES
+   ========================= */
+
+.t1 {
+    font-size: 2em;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.t2 {
+    font-size: 1.5em;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+.t3 {
+    font-size: 1.17em;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-top: 0.5em;
+    margin-bottom: 0.3em;
+}
+
+/* =========================
    STYLE GENERAL
    ========================= */
 
