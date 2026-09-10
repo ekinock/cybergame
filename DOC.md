@@ -17,7 +17,7 @@ Ce jeu a été fait avec Twine, qui est disponible sous 2 formats :
 - [client lourd](https://github.com/klembot/twinejs/releases)
 - [version web](https://twinery.org/2/#/)
 
-> [!NOTE]
+> [!TIP]
 > Lorsque l'on utilise Twine en version web, les projets sont sauvegardés localement. Je n'ai pas trouvé, à ce jour, de moyen de les synchroniser avec un navigateur sur un autre PC.\
 > Pour transférer un projet, il faut soit **"Publish to File"** depuis le projet (fichier .html), soit **"Export As Twee"** (fichier .twee, utilisable par twine uniqument). On peut ensuite, depuis le **Story Bord** du second navigateur, **"Import"** les fichiers.\
 > Il n'y aura cependant **pas de mises à jour dynamiques** entre les 2 navigateurs
@@ -41,5 +41,18 @@ Les balises HTML et les références aux images sont insérées directement lors
 - **title** *(ligne 5)* : titre du document HTML
 - **tw-storydata name** : nom de l'histoire Twine - **n'apparaît pas** après publication web
 - **name=generateName** : nom qui apparaitra dans le menu à gauche & sur l'onglet *(variable JS)*
+
+##### A rajouter manuellement au fichier HTML
+A rajouter après le bloc *script* dans lequel il y a toutes les lignes qui commencent par *"style id="*, avant la balise *"/head"*.
+```html
+<link rel="stylesheet" href="../style.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,800&display=swap" rel="stylesheet">
+``` 
+> [!NOTE]
+> Ces lignes permettent de pointer le fichier .css où sont configurés les paramètres graphiques, et de télécharger les polices Google utilisées (qui correspondent à la charte graphique du CHUN).
+
+### Système
+
+
 
 ## Fonctionnement/Contenu
