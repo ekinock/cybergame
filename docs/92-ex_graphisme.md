@@ -4,9 +4,9 @@
 🚀 ***Début***
 
 ```html
-<!-- Twine gère nativement les balises html de base :
+<!-- Twine gère nativement les balises HTML de base :
  - gras / italique / souligné / barré
- - titres de bases (h, h1, h2)
+ - titres de base (h, h1, h2)
  - identification des paragraphes avec <p> -->
 
 L'utilisateur reçoit un mail <i>bizarre</i> : <!-- italique -->
@@ -64,7 +64,7 @@ Plus d'informations sur l'<a href="http://intranet.intra.chu-nantes.fr/">Intrane
 <div class="t1">FIN</div>
 
 <!-- ... les textes de couleurs ... -->
-<span class=text-flot>Merci d'avoir participé !</span>
+<span class="text-flot">Merci d'avoir participé !</span>
 
 <!-- ... mais aussi le fond de la page, les menus, les polices ... etc. -->
 ```

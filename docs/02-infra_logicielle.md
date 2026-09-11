@@ -49,21 +49,22 @@ C'est sur celle-ci que sont initialisées les variables (JS).
 <<goto "Première slide du récit">>
 ```
 > [!IMPORTANT]
-> Les variables sont des **compteurs** qui vont s'implémenter en fonction des choix du joueur.\
-> Il est essentiel de les initialiser au début de chaque session de jeu, sinon les scores pourraient avoir des comportements difficillement prévisibles.
+> Si les variables sont des **compteurs** qui s'implémente en fonction des choix du joueur, il est essentiel de les initialiser au début de chaque session de jeu, sinon les scores pourraient avoir des comportements difficillement prévisibles.
 
 Ici, les variables sont utilisées pour **permettre l'obtention de badges** par le joueur ; c'est un fonctionnalité ludique, mais **secondaire**.\
 Il aurait également été possible de concevoir un **système de scoring** par cette intermédiaire, ou des les utiliser pour gérer l'apparition d'**évenements aléatoires**.
-
 
 ## Code
 J'utilise comme langage par défaut **SugarCube 2.37.3** pour la gestion du récit.\
 Dans chaque slide, j'utilise :
 - **JavaScript** : pour la gestions des variables (compteurs & aléatoire) 
 - **HTML** : pour la mise en page
-- **CSS** : un fichier *style.css*, situé à la racine du projet
+- **CSS** : un fichier *style.css*, situé à la racine du projet *(extérieur à Twine)*
 
 ### Navigation d'une slide à l'autre
+
+
+
 
 ### Gestion des variables
 #### Comportements aléatoires

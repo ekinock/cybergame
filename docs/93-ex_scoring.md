@@ -16,57 +16,40 @@ Cette action n'est pas visible pour le joueur */
 L'utilisateur reçoit un mail bizarre : 
 <img src="/chemin/image.png">
 
-[[ cliquer | RandomFin][ $score += 10 ]]
-[[ cliquer et inciter ses collègues à faire pareil | Conseil][ $score += 3 ]] 
-[[ ne pas cliquer | RandomFin][ $score += 3 ]]
-[[ signaler comme suspect | RandomFin]]
+[[ cliquer | Alerte][ $score += 2 ]]
+[[ cliquer et inciter ses collègues à faire pareil | Alerte][ $score += 4 ]] 
+[[ ne pas cliquer | Alerte][ $score += 1 ]]
+[[ signaler comme suspect | Alerte]]
 ```
 
-## Passage 2 - Conseil
+## Passage 3 - Alerte
 ```html
-Il commence à se passer des choses étranges.
-[[ prévenir la DSN | PiratageUser]]
-[[ ne rien faire | PiratageCollegue][ $score += 3 ]]
-[[ dissuader les autres de prévenir la DSN | NonPiratage][ $score += 3 ]]
+Il commence à se passer des choses suspectes.
+[[ prévenir la DSN | Redirect]]
+[[ ne rien faire | Redirect][ $score += 2 ]]
+[[ dissuader les autres de prévenir la DSN | Redirect][ $score += 4 ]]
 ```
 
-## Passage 3 - Redirect
+## Passage 4 - Redirect
 ```javascript
-/* La variable _p est utilisée pour définir un événement aléatoire */
-<<set _p = random(1,100)>>
 
-/* Il y a :
-- 30% de chances que les collègues se fassent berner par le mail et recommande au joueur de cliquer
-- 70% de chances que les collègues ne se fassent pas berner par le mail et recommande au joueur de ne pas cliquer 
+/* Le score sanctionne les mauvaises décisions ; plus il est haut, plus l'attaque aura été délétère pour le CHU.
+La fin qu'aura le joueur dépendra de la hauteur de son score.
 
-Encore une fois, ces actions ne sont pas visibles par le joueur, et la redirection se fait quasi instantanément. */
-<<if _p <= 30>>
-		<<set $conseil = 1 >>
-        <<goto "ConseilOui">>
-	<<else>>
-		<<set $conseil = 0 >>
-        <<goto "ConseilNon">>
-<</if>>
+Cette redirection est également invisible pour le joueur. */
 
 <<if $score <= 1>> 
 	<<goto "FinNul">>
-/* Si l'utilisateur n'a pas cliqué, il a un % de chance définit plus haut (_user) de s'être fait pirater */
-<<elseif $score == 0>>
-	<<if _r <= _user>>
-		<<goto "FinFaible">>
-/* S'il ne s'est pas fait pirater, il y a un % de chance définit plus haut (_ok) que personne d'autre ne se soit fait pirater */
-	<<elseif _r >= _ok>>
-		<<goto "FinMoyen">>
-/* Si l'user ne s'est pas fait pirater, mais que nous ne somme pas non plus dans le cas où personne ne s'est fait pirater, alors c'est que c'est l'un des collègues qui s'est fait avoir */
-	<<else>>
-		<<goto "FinFort">>
-	<</if>>
+<<elseif ($score > 1 && $score <= 3)>>
+	<<goto "FinFaible">>
+<<elseif ($score > 3 && $score <= 5)>>
+	<<goto "FinMoyen">>
+<<else>>
+	<<goto "FinFort">>
 <</if>>
 ```
 
-
-
-## Passage 3 - FinNul
+## Passage 5 - FinNul
 ```html
 L'utilisateur a tout bien fait.
 Pas de piratage.
@@ -74,7 +57,7 @@ Pas de piratage.
 Score d'impact : $score
 ```
 
-## Passage 3 - FinFaible
+## Passage 6 - FinFaible
 ```html
 L'utilisateur a fait quelques erreurs.
 Pas de piratage, mais ce n'est pas passé loin.
@@ -82,20 +65,18 @@ Pas de piratage, mais ce n'est pas passé loin.
 Score d'impact : $score
 ```
 
-## Passage 3 - FinMoyen
+## Passage 7 - FinMoyen
 ```html
 L'utilisateur a fait plusieurs erreurs.
-Il a bien eu piratage, mais les conséquences ont été limitées.
+Il a bien eu un piratage, mais les conséquences ont été limitées.
 
 Score d'impact : $score
 ```
 
-## Passage 3 - FinFort
+## Passage 8 - FinFort
 ```html
 L'utilisateur a fait de nombreuses erreurs.
-Le piratege a mis longtemps a être détecté ; le virus a eu le temps de se répandre, et des nombreuses données ont été volées et/ou corrompues.
+Le piratage a mis longtemps à être détecté ; le virus a eu le temps de se répandre, et de nombreuses données ont été volées et/ou corrompues.
 
 Score d'impact : $score
 ```
-
-   

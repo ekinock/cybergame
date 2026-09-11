@@ -32,8 +32,8 @@ L'utilisateur reçoit un mail bizarre :
 <<set _p = random(1,100)>>
 
 /* Il y a :
-- 30% de chances que les collègues se fassent berner par le mail et recommande au joueur de cliquer
-- 70% de chances que les collègues ne se fassent pas berner par le mail et recommande au joueur de ne pas cliquer 
+- 30% de chances que les collègues se fassent berner par le mail et recommandent au joueur de cliquer
+- 70% de chances que les collègues ne se fassent pas berner par le mail et recommandent au joueur de ne pas cliquer 
 
 Encore une fois, ces actions ne sont pas visibles par le joueur, et la redirection se fait quasi instantanément. */
 <<if _p <= 30>>
@@ -63,7 +63,7 @@ Les collègues conseillent de ne pas cliquer.
 
 ## Passage 6 - RandomFin
 ```javascript
-/* Si l'utilisateur a donné l'alerte : découverte de l'attaque dés lundi
+/* Si l'utilisateur a donné l'alerte : découverte de l'attaque dès lundi
 Sinon : découverte de l'attaque uniquement le jeudi
 (donner l'alerte = réduction de délais de détection) */
 <<if $alert == 1>>
@@ -74,30 +74,30 @@ Sinon : découverte de l'attaque uniquement le jeudi
 
 /* Deux variables sont utilisées : 
 - _user : % de chance que l'utilisateur se soit fait pirater
-- _ok : % de chance que personne ne se soit fait pirater (collègues inclus)
-Par défaut tout va bien, et les différentes actions vont augmenter les risques que le user ou ses collégues se soient fait pirater.
-Les probabilités diffèrent selon si le user a transféré le mail malveillant ou non, et selon si ses collègues se sont également faits duper ou non. */
+- _ami : % de chance qu'un collègue ce soit fait pirater
+Par défaut tout va bien, et les différentes actions vont augmenter les risques que le user ou ses collègues se soient fait pirater.
+Les probabilités diffèrent selon si le user a transféré le mail malveillant ou non, et selon si ses collègues se sont également fait duper ou non. */
 <<set _cas = $transfert + "-" + $conseil>>
 <<switch _cas>>
 <<case "1-1">>
 	<<set _user = 16>>
-	<<set _ok = 76>>
+	<<set _ami = 50>>
 	<<break>>
 <<case "1-0">>
-	<<set _user = 6>>
-	<<set _ok = 66>>
+	<<set _user = 5>>
+	<<set _ami = 15>>
 	<<break>>
 <<case "0-1">>
 	<<set _user = 4>>
-	<<set _ok = 44>>
+	<<set _ami = 30>>
 	<<break>>
 <<case "0-0">>
-	<<set _user = 1>>
-	<<set _ok = 11>>
+	<<set _user = 2>>
+	<<set _ami = 8>>
 	<<break>>
 <<default>>
 	<<set _user = 0>>
-	<<set _ok = 100>>
+	<<set _ami = 100>>
 	<<break>>
 <</switch>>
 
@@ -107,20 +107,17 @@ Les probabilités diffèrent selon si le user a transféré le mail malveillant 
 /* Si l'utilisateur a cliqué, il a 100% de chance de s'être fait pirater */
 <<if $clic == 1>> 
 	<<goto "PiratageUser">>
-/* Si l'utilisateur n'a pas cliqué, il a un % de chance définit plus haut (_user) de s'être fait pirater */
-<<elseif $clic == 0>>
-	<<if _r <= _user>>
-		<<goto "PiratageUser">>
-/* S'il ne s'est pas fait pirater, il y a un % de chance définit plus haut (_ok) que personne d'autre ne se soit fait pirater */
-	<<elseif _r >= _ok>>
-		<<goto "NonPiratage">>
-/* Si l'user ne s'est pas fait pirater, mais que nous ne somme pas non plus dans le cas où personne ne s'est fait pirater, alors c'est que c'est l'un des collègues qui s'est fait avoir */
-	<<else>>
-		<<goto "PiratageCollegue">>
-	<</if>>
+/* Si l'utilisateur n'a pas cliqué, il a un % de chance défini plus haut (_user) de s'être fait pirater */
+<<elseif _r <= _user>>
+	<<goto "PiratageUser">>
+/* S'il ne s'est pas fait pirater, il y a un % de chance de _ami qu'un collègue se soit fait pirater */
+<<elseif _r <= _user + _ami>>
+	<<goto "PiratageCollegue">>
+/* Sinon, personne ne s'est fait pirater */
+<<else>>
+	<<goto "NonPiratage">>
 <</if>>
 ```
-
 
 ## Passage 7 - PiratageUser
 ```text
@@ -138,10 +135,3 @@ L'attaque a été détectée $jour.
 ```text
 Personne ne s'est fait piraté.
 ```
-
-
-
-
-
-
-   
